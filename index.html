@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>It's Raining Cats 🐱</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+
+  <div class="hero">
+    <div class="title">It's Raining<br>Cats! 🐱</div>
+    <p class="subtitle">Press the button and witness the most important weather phenomenon known to humankind.</p>
+    <p class="counter" id="counter">☁️ Not raining yet…</p>
+    <button class="btn" id="mainBtn" onclick="toggleRain()">🌧️ Cat dispenser</button>
+  </div>
+
+  <div class="ground"></div>
+
+  <script>
+    const cats = ['🐱','😺','😸','😹','😻','😼','😽','🐈','🐈‍⬛','🙀','😿','😾'];
+    let raining = false;
+    let interval = null;
+    let catCount = 0;
+
+    const btn = document.getElementById('mainBtn');
+    const counter = document.getElementById('counter');
+
+    function spawnCat() {
+      const el = document.createElement('div');
+      el.classList.add('cat');
+      const cat = cats[Math.floor(Math.random() * cats.length)];
+      el.textContent = cat;
+      const x = Math.random() * (window.innerWidth - 60);
+      el.style.left = x + 'px';
+      const dur = 1.4 + Math.random() * 2.2;
+      const size = 1.8 + Math.random() * 2;
+      const rotate = (Math.random() - 0.5) * 40;
+      el.style.fontSize = size + 'rem';
+      el.style.animationDuration = dur + 's';
+      el.style.transform = `rotate(${rotate}deg)`;
+      document.body.appendChild(el);
+      catCount++;
+      updateCounter();
+
+      setTimeout(() => {
+        spawnSplash(x, cat);
+        el.remove();
+      }, dur * 1000);
+    }
+
+    function spawnSplash(x, cat) {
+      const s = document.createElement('div');
+      s.classList.add('splash');
+      s.textContent = cat;
+      s.style.left = (x + 10) + 'px';
+      s.style.bottom = '90px';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 650);
+    }
+
+    function updateCounter() {
+      if (raining) {
+        counter.textContent = `🐱 ${catCount} cat${catCount !== 1 ? 's' : ''} have fallen!`;
+      }
+    }
+
+    function toggleRain() {
+      raining = !raining;
+      if (raining) {
+        btn.textContent = '🛑 Stop the Cats!';
+        btn.classList.add('btn-stop');
+        counter.textContent = `🐱 0 cats have fallen!`;
+        for (let i = 0; i < 8; i++) {
+          setTimeout(spawnCat, i * 100);
+        }
+        interval = setInterval(() => {
+          const burst = Math.floor(Math.random() * 3) + 1;
+          for (let i = 0; i < burst; i++) setTimeout(spawnCat, i * 120);
+        }, 500);
+      } else {
+        btn.textContent = '🌧️ Make it Rain Cats!';
+        btn.classList.remove('btn-stop');
+        clearInterval(interval);
+        counter.textContent = `☁️ ${catCount} cats fell in total. Rest well, little ones.`;
+        catCount = 0;
+      }
+    }
+  </script>
+</body>
+</html>
