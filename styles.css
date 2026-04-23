@@ -61,3 +61,116 @@ body::before {
 .cloud-3::after  { width: 85px;  height: 70px; top: -32px; left: 90px; }
 
 /* Hero */
+.hero {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 4rem;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text);
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.counter {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.5rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--btn-shadow);
+  transition: all 0.1s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--btn-shadow);
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--btn-shadow);
+}
+
+.btn-stop {
+  background: var(--accent2);
+  box-shadow: 0 4px 0 #7c3aed;
+}
+
+.btn-stop:hover {
+  box-shadow: 0 6px 0 #7c3aed;
+}
+
+.btn-stop:active {
+  box-shadow: 0 2px 0 #7c3aed;
+}
+
+/* Ground */
+.ground {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(0deg, #8b5a3c 0%, #a67c52 100%);
+  z-index: 3;
+}
+
+/* Cats */
+.cat {
+  position: absolute;
+  top: -50px;
+  z-index: 2;
+  animation: fall linear forwards;
+  font-size: 2rem;
+  user-select: none;
+}
+
+@keyframes fall {
+  to {
+    top: calc(100vh - 150px);
+  }
+}
+
+/* Splash */
+.splash {
+  position: absolute;
+  bottom: 90px;
+  z-index: 4;
+  font-size: 1.5rem;
+  animation: splash 0.65s ease-out forwards;
+  user-select: none;
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5) rotate(180deg);
+    opacity: 0;
+  }
+}
